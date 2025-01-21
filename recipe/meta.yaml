@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/envkernel-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/envkernel-{{ version }}.tar.gz
   sha256: dcdc64e64758fa9a73187c7413a74f8a85cdfaf0c68a9c2e05f75d0db859fd13
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - envkernel=envkernel:main
@@ -20,10 +20,10 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - jupyter_client
-    - python >=3.6
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -33,6 +33,7 @@ test:
     - envkernel --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/NordicHPC/envkernel
