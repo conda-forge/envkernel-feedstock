@@ -1,0 +1,55 @@
+schema_version: 1
+
+context:
+  name: envkernel
+  version: "1.1.1"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/${{ name[0] }}/${{ name }}/envkernel-${{ version }}.tar.gz
+  sha256: 0d3a547f155b4e5c43339d96bb0c574f6d29d7c31179f661bacb7107d4c27a4b
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - envkernel=envkernel:main
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - setuptools
+  run:
+    - jupyter_client
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      imports:
+        - envkernel
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+  - requirements:
+      run:
+        - pip
+        - python ${{ python_min }}.*
+    script:
+      - envkernel --help
+
+about:
+  summary: Jupyter kernels manipulation and in other environments.
+  license: BSD-3-Clause
+  license_file: LICENSE
+  homepage: https://github.com/NordicHPC/envkernel
+
+extra:
+  recipe-maintainers:
+    - thewchan
