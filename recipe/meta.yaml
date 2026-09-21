@@ -1,5 +1,5 @@
 {% set name = "envkernel" %}
-{% set version = "1.1.0" %}
+{% set version = "1.1.1" %}
 
 
 package:
@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/envkernel-{{ version }}.tar.gz
-  sha256: dcdc64e64758fa9a73187c7413a74f8a85cdfaf0c68a9c2e05f75d0db859fd13
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/envkernel-{{ version }}.tar.gz
+  sha256: 0d3a547f155b4e5c43339d96bb0c574f6d29d7c31179f661bacb7107d4c27a4b
 
 build:
-  number: 1
+  number: 0
   noarch: python
   entry_points:
     - envkernel=envkernel:main
